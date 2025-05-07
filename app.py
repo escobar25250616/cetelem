@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import json
 import os
 
@@ -14,23 +14,13 @@ else:
 
 @app.route("/", methods=["GET"])
 def index():
-    html = "<h1>Messages reçus :</h1><ul>"
-    for m in messages:
-        try:
-            text = m['message']['text']
-            user = m['message']['from']['first_name']
-            html += f"<li><b>{user}</b> : {text}</li>"
-        except:
-            html += "<li>(message non texte)</li>"
-    html += "</ul>"
-    return html
+    return render_template("index.html", messages=messages)
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
     data = request.json
     if data:
         messages.append(data)
-        # Enregistrer dans messages.json
         with open(DATA_FILE, "w", encoding="utf-8") as f:
             json.dump(messages, f, ensure_ascii=False, indent=2)
         print("Message reçu :", data)
