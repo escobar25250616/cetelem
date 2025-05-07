@@ -1,7 +1,16 @@
 from flask import Flask, request
+import json
+import os
 
 app = Flask(__name__)
-messages = []
+DATA_FILE = "messages.json"
+
+# Charger les anciens messages s’ils existent
+if os.path.exists(DATA_FILE):
+    with open(DATA_FILE, "r", encoding="utf-8") as f:
+        messages = json.load(f)
+else:
+    messages = []
 
 @app.route("/", methods=["GET"])
 def index():
@@ -21,6 +30,9 @@ def webhook():
     data = request.json
     if data:
         messages.append(data)
+        # Enregistrer dans messages.json
+        with open(DATA_FILE, "w", encoding="utf-8") as f:
+            json.dump(messages, f, ensure_ascii=False, indent=2)
         print("Message reçu :", data)
     return "OK", 200
 
