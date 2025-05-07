@@ -5,14 +5,23 @@ messages = []
 
 @app.route("/", methods=["GET"])
 def index():
-    return "<h1>Serveur Flask en ligne</h1><p>Le webhook Telegram est prêt.</p>"
+    html = "<h1>Messages reçus :</h1><ul>"
+    for m in messages:
+        try:
+            text = m['message']['text']
+            user = m['message']['from']['first_name']
+            html += f"<li><b>{user}</b> : {text}</li>"
+        except:
+            html += "<li>(message non texte)</li>"
+    html += "</ul>"
+    return html
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
     data = request.json
     if data:
         messages.append(data)
-        print("Message reçu :", data)  # Pour debug Render (logs)
+        print("Message reçu :", data)
     return "OK", 200
 
 if __name__ == "__main__":
