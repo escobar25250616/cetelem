@@ -8,7 +8,10 @@ DATA_FILE = "messages.json"
 # Charger les anciens messages s’ils existent
 if os.path.exists(DATA_FILE):
     with open(DATA_FILE, "r", encoding="utf-8") as f:
-        messages = json.load(f)
+        try:
+            messages = json.load(f)
+        except json.JSONDecodeError:
+            messages = []
 else:
     messages = []
 
