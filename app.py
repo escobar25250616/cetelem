@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import json
 import os
 
@@ -27,7 +27,14 @@ def webhook():
         with open(DATA_FILE, "w", encoding="utf-8") as f:
             json.dump(messages, f, ensure_ascii=False, indent=2)
         print("Message reçu :", data)
-    return "OK", 200
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(debug=True)
+@app.route("/suivant", methods=["POST"])
+def suivant():
+    identifiant = request.form.get("identifiant")
+    remember = request.form.get("remember") == "on"
+    # Ici, tu peux traiter les données comme tu veux
+    print(f"Identifiant reçu : {identifiant}, Remember: {remember}")
+    return render_template("suivant.html", identifiant=identifiant, remember=remember)

